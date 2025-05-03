@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envio de Procedimento - Estúdio Arco</title>
+<style>
+body { font-family: sans-serif; background-color: #f8f8f8; margin: 30px; }
+.container { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+h2 { text-align: center; color: #444; }
+label { display: block; margin-top: 15px; font-weight: bold; }
+input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+button { margin-top: 20px; width: 100%; padding: 10px; background-color: #4CAF50; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer; }
+button:hover { background-color: #45a049; }
+.hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Envio de Procedimento</h2>
+  <form onsubmit="event.preventDefault(); alert('Dados enviados com sucesso!');">
+    <label for="colaborador">Nome do Tatuador</label>
+    <select id="colaborador" required>
+      <option value="">Selecione</option>
+      <option>Kenji</option>
+      <option>Yago</option>
+      <option>Julia</option>
+      <option>Rossi</option>
+      <option>Hari</option>
+      <option>Estela</option>
+      <option>Bada</option>
+      <option>Alan</option>
+      <option>Stephanie</option>
+    </select>
+
+    <label for="valor">Valor total do procedimento (R$)</label>
+    <input type="number" id="valor" placeholder="Ex: 450" required>
+
+    <label for="comprovanteCliente">Comprovante de pagamento do cliente</label>
+    <input type="file" id="comprovanteCliente" accept="image/*,.pdf" required>
+
+    <label for="comprovanteTatuador">Comprovante de repasse para o estúdio</label>
+    <input type="file" id="comprovanteTatuador" accept="image/*,.pdf" required>
+
+    <label for="pagamento">Forma de pagamento</label>
+    <select id="pagamento" required onchange="mostrarCampoData()">
+      <option value="">Selecione</option>
+      <option value="Pix">Pix</option>
+      <option value="Cartão">Cartão</option>
+      <option value="Dinheiro">Dinheiro</option>
+    </select>
+
+    <div id="campoData" class="hidden">
+      <label for="dataCartao">Data prevista de recebimento</label>
+      <input type="date" id="dataCartao">
+    </div>
+
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+<script>
+function mostrarCampoData() {
+  const pagamento = document.getElementById("pagamento").value;
+  const campoData = document.getElementById("campoData");
+  campoData.className = (pagamento === "Cartão") ? "" : "hidden";
+}
+</script>
+</body>
+</html>
