@@ -19,8 +19,8 @@ button:hover { background-color: #45a049; }
 <body>
 <div class="container">
   <h2>Envio de Procedimento</h2>
-  <form onsubmit="event.preventDefault(); alert('Dados enviados com sucesso!');">
-    <label for="colaborador">Nome do Tatuador</label>
+ <form onsubmit="enviarFormulario(event)">
+<label for="colaborador">Nome do Tatuador</label>
     <select id="colaborador" required>
       <option value="">Selecione</option>
       <option>Kenji</option>
@@ -69,3 +69,23 @@ function mostrarCampoData() {
 </script>
 </body>
 </html>
+<script>
+function enviarFormulario(event) {
+  event.preventDefault();
+
+  const data = {
+    colaborador: document.getElementById("colaborador").value,
+    valor: document.getElementById("valor").value,
+    pagamento: document.getElementById("pagamento").value,
+    dataCartao: document.getElementById("dataCartao")?.value || ""
+  };
+
+  fetch("COLE_AQUI_O_LINK_DO_APPS_SCRIPT", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => alert("Enviado com sucesso!"))
+  .catch(err => alert("Erro ao enviar"));
+}
+</script>
